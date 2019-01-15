@@ -1,2 +1,2 @@
 # deep_learning
-Project for Deep Learning Course
+Projects for Deep Learning Course

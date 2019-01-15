@@ -1,0 +1,1472 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Art Generation with Neural Style Transfer}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Deep Learning \& Art: Neural Style
+Transfer}\label{deep-learning-art-neural-style-transfer}
+
+Welcome to the second assignment of this week. In this assignment, you
+will learn about Neural Style Transfer. This algorithm was created by
+Gatys et al. (2015) (https://arxiv.org/abs/1508.06576).
+
+\textbf{In this assignment, you will:} - Implement the neural style
+transfer algorithm - Generate novel artistic images using your algorithm
+
+Most of the algorithms you've studied optimize a cost function to get a
+set of parameter values. In Neural Style Transfer, you'll optimize a
+cost function to get pixel values!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+         \PY{k+kn}{import} \PY{n+nn}{sys}
+         \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{io}
+         \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{misc}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{import} \PY{n}{imshow}
+         \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+         \PY{k+kn}{from} \PY{n+nn}{nst\PYZus{}utils} \PY{k}{import} \PY{o}{*}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+         \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+         
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \subsection{1 - Problem Statement}\label{problem-statement}
+
+Neural Style Transfer (NST) is one of the most fun techniques in deep
+learning. As seen below, it merges two images, namely, a "content" image
+(C) and a "style" image (S), to create a "generated" image (G). The
+generated image G combines the "content" of the image C with the "style"
+of image S.
+
+In this example, you are going to generate an image of the Louvre museum
+in Paris (content image C), mixed with a painting by Claude Monet, a
+leader of the impressionist movement (style image S).
+
+Let's see how you can do this.
+
+    \subsection{2 - Transfer Learning}\label{transfer-learning}
+
+Neural Style Transfer (NST) uses a previously trained convolutional
+network, and builds on top of that. The idea of using a network trained
+on a different task and applying it to a new task is called transfer
+learning.
+
+Following the original NST paper (https://arxiv.org/abs/1508.06576), we
+will use the VGG network. Specifically, we'll use VGG-19, a 19-layer
+version of the VGG network. This model has already been trained on the
+very large ImageNet database, and thus has learned to recognize a
+variety of low level features (at the earlier layers) and high level
+features (at the deeper layers).
+
+Run the following code to load parameters from the VGG model. This may
+take a few seconds.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{model} \PY{o}{=} \PY{n}{load\PYZus{}vgg\PYZus{}model}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/media/den/FA48890B4888C7B9/2\PYZus{}kurs\PYZus{}masters/deep Learning/pretrained\PYZhy{}model/imagenet\PYZhy{}vgg\PYZhy{}verydeep\PYZhy{}19.mat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'input': <tf.Variable 'Variable\_1:0' shape=(1, 300, 400, 3) dtype=float32\_ref>, 'conv1\_1': <tf.Tensor 'Relu\_16:0' shape=(1, 300, 400, 64) dtype=float32>, 'conv1\_2': <tf.Tensor 'Relu\_17:0' shape=(1, 300, 400, 64) dtype=float32>, 'avgpool1': <tf.Tensor 'AvgPool\_5:0' shape=(1, 150, 200, 64) dtype=float32>, 'conv2\_1': <tf.Tensor 'Relu\_18:0' shape=(1, 150, 200, 128) dtype=float32>, 'conv2\_2': <tf.Tensor 'Relu\_19:0' shape=(1, 150, 200, 128) dtype=float32>, 'avgpool2': <tf.Tensor 'AvgPool\_6:0' shape=(1, 75, 100, 128) dtype=float32>, 'conv3\_1': <tf.Tensor 'Relu\_20:0' shape=(1, 75, 100, 256) dtype=float32>, 'conv3\_2': <tf.Tensor 'Relu\_21:0' shape=(1, 75, 100, 256) dtype=float32>, 'conv3\_3': <tf.Tensor 'Relu\_22:0' shape=(1, 75, 100, 256) dtype=float32>, 'conv3\_4': <tf.Tensor 'Relu\_23:0' shape=(1, 75, 100, 256) dtype=float32>, 'avgpool3': <tf.Tensor 'AvgPool\_7:0' shape=(1, 38, 50, 256) dtype=float32>, 'conv4\_1': <tf.Tensor 'Relu\_24:0' shape=(1, 38, 50, 512) dtype=float32>, 'conv4\_2': <tf.Tensor 'Relu\_25:0' shape=(1, 38, 50, 512) dtype=float32>, 'conv4\_3': <tf.Tensor 'Relu\_26:0' shape=(1, 38, 50, 512) dtype=float32>, 'conv4\_4': <tf.Tensor 'Relu\_27:0' shape=(1, 38, 50, 512) dtype=float32>, 'avgpool4': <tf.Tensor 'AvgPool\_8:0' shape=(1, 19, 25, 512) dtype=float32>, 'conv5\_1': <tf.Tensor 'Relu\_28:0' shape=(1, 19, 25, 512) dtype=float32>, 'conv5\_2': <tf.Tensor 'Relu\_29:0' shape=(1, 19, 25, 512) dtype=float32>, 'conv5\_3': <tf.Tensor 'Relu\_30:0' shape=(1, 19, 25, 512) dtype=float32>, 'conv5\_4': <tf.Tensor 'Relu\_31:0' shape=(1, 19, 25, 512) dtype=float32>, 'avgpool5': <tf.Tensor 'AvgPool\_9:0' shape=(1, 10, 13, 512) dtype=float32>\}
+
+    \end{Verbatim}
+
+    The model is stored in a python dictionary where each variable name is
+the key and the corresponding value is a tensor containing that
+variable's value. To run an image through this network, you just have to
+feed the image to the model. In TensorFlow, you can do so using the
+\href{https://www.tensorflow.org/api_docs/python/tf/assign}{tf.assign}
+function. In particular, you will use the assign function like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model[}\StringTok{"input"}\NormalTok{].assign(image)}
+\end{Highlighting}
+\end{Shaded}
+
+This assigns the image as an input to the model. After this, if you want
+to access the activations of a particular layer, say layer \texttt{4\_2}
+when the network is run on this image, you would run a TensorFlow
+session on the correct tensor \texttt{conv4\_2}, as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sess.run(model[}\StringTok{"conv4_2"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+    \subsection{3 - Neural Style Transfer}\label{neural-style-transfer}
+
+We will build the NST algorithm in three steps:
+
+\begin{itemize}
+\tightlist
+\item
+  Build the content cost function \(J_{content}(C,G)\)
+\item
+  Build the style cost function \(J_{style}(S,G)\)
+\item
+  Put it together to get
+  \(J(G) = \alpha J_{content}(C,G) + \beta J_{style}(S,G)\).
+\end{itemize}
+
+\subsubsection{3.1 - Computing the content
+cost}\label{computing-the-content-cost}
+
+In our running example, the content image C will be the picture of the
+Louvre Museum in Paris. Run the code below to see a picture of the
+Louvre.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{content\PYZus{}image} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{misc}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images/louvre.jpeg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{imshow}\PY{p}{(}\PY{n}{content\PYZus{}image}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} path = \PYZdq{}images/dino.jpg\PYZdq{}}
+         \PY{c+c1}{\PYZsh{} image = Image.open(path)}
+         \PY{c+c1}{\PYZsh{} imshow(image)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/den/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:1: DeprecationWarning: `imread` is deprecated!
+`imread` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
+Use ``imageio.imread`` instead.
+  """Entry point for launching an IPython kernel.
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} <matplotlib.image.AxesImage at 0x7f2b38685ef0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The content image (C) shows the Louvre museum's pyramid surrounded by
+old Paris buildings, against a sunny sky with a few clouds.
+
+** 3.1.1 - How do you ensure the generated image G matches the content
+of the image C?**
+
+As we saw in lecture, the earlier (shallower) layers of a ConvNet tend
+to detect lower-level features such as edges and simple textures, and
+the later (deeper) layers tend to detect higher-level features such as
+more complex textures as well as object classes.
+
+We would like the "generated" image G to have similar content as the
+input image C. Suppose you have chosen some layer's activations to
+represent the content of an image. In practice, you'll get the most
+visually pleasing results if you choose a layer in the middle of the
+network-\/-neither too shallow nor too deep. (After you have finished
+this exercise, feel free to come back and experiment with using
+different layers, to see how the results vary.)
+
+So, suppose you have picked one particular hidden layer to use. Now, set
+the image C as the input to the pretrained VGG network, and run forward
+propagation. Let \(a^{(C)}\) be the hidden layer activations in the
+layer you had chosen. (In lecture, we had written this as
+\(a^{[l](C)}\), but here we'll drop the superscript \([l]\) to simplify
+the notation.) This will be a \(n_H \times n_W \times n_C\) tensor.
+Repeat this process with the image G: Set G as the input, and run
+forward progation. Let \[a^{(G)}\] be the corresponding hidden layer
+activation. We will define as the content cost function as:
+
+\[J_{content}(C,G) =  \frac{1}{4 \times n_H \times n_W \times n_C}\sum _{ \text{all entries}} (a^{(C)} - a^{(G)})^2\tag{1} \]
+
+Here, \(n_H, n_W\) and \(n_C\) are the height, width and number of
+channels of the hidden layer you have chosen, and appear in a
+normalization term in the cost. For clarity, note that \(a^{(C)}\) and
+\(a^{(G)}\) are the volumes corresponding to a hidden layer's
+activations. In order to compute the cost \(J_{content}(C,G)\), it might
+also be convenient to unroll these 3D volumes into a 2D matrix, as shown
+below. (Technically this unrolling step isn't needed to compute
+\(J_{content}\), but it will be good practice for when you do need to
+carry out a similar operation later for computing the style const
+\(J_{style}\).)
+
+\textbf{Exercise:} Compute the "content cost" using TensorFlow.
+
+\textbf{Instructions}: The 3 steps to implement this function are: 1.
+Retrieve dimensions from a\_G: - To retrieve dimensions from a tensor X,
+use: \texttt{X.get\_shape().as\_list()} 2. Unroll a\_C and a\_G as
+explained in the picture above - If you are stuck, take a look at
+\href{https://www.tensorflow.org/versions/r1.3/api_docs/python/tf/transpose}{Hint1}
+and
+\href{https://www.tensorflow.org/versions/r1.2/api_docs/python/tf/reshape}{Hint2}.
+3. Compute the content cost: - If you are stuck, take a look at
+\href{https://www.tensorflow.org/api_docs/python/tf/reduce_sum}{Hint3},
+\href{https://www.tensorflow.org/api_docs/python/tf/square}{Hint4} and
+\href{https://www.tensorflow.org/api_docs/python/tf/subtract}{Hint5}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} GRADED FUNCTION: compute\PYZus{}content\PYZus{}cost}
+        
+        \PY{k}{def} \PY{n+nf}{compute\PYZus{}content\PYZus{}cost}\PY{p}{(}\PY{n}{a\PYZus{}C}\PY{p}{,} \PY{n}{a\PYZus{}G}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Computes the content cost}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Arguments:}
+        \PY{l+s+sd}{    a\PYZus{}C \PYZhy{}\PYZhy{} tensor of dimension (1, n\PYZus{}H, n\PYZus{}W, n\PYZus{}C), hidden layer activations representing content of the image C }
+        \PY{l+s+sd}{    a\PYZus{}G \PYZhy{}\PYZhy{} tensor of dimension (1, n\PYZus{}H, n\PYZus{}W, n\PYZus{}C), hidden layer activations representing content of the image G}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns: }
+        \PY{l+s+sd}{    J\PYZus{}content \PYZhy{}\PYZhy{} scalar that you compute using equation 1 above.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+            \PY{c+c1}{\PYZsh{} Retrieve dimensions from a\PYZus{}G (≈1 line)}
+            \PY{n}{m}\PY{p}{,} \PY{n}{n\PYZus{}H}\PY{p}{,} \PY{n}{n\PYZus{}W}\PY{p}{,} \PY{n}{n\PYZus{}C} \PY{o}{=} \PY{n}{a\PYZus{}G}\PY{o}{.}\PY{n}{get\PYZus{}shape}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{as\PYZus{}list}\PY{p}{(}\PY{p}{)}
+            
+            
+            \PY{c+c1}{\PYZsh{} Reshape a\PYZus{}C and a\PYZus{}G (≈2 lines)}
+            \PY{n}{a\PYZus{}C\PYZus{}unrolled} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{a\PYZus{}C}\PY{p}{,}\PY{p}{(}\PY{n}{n\PYZus{}H}\PY{o}{*}\PY{n}{n\PYZus{}W}\PY{p}{,}\PY{n}{n\PYZus{}C}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{a\PYZus{}G\PYZus{}unrolled} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{a\PYZus{}G}\PY{p}{,}\PY{p}{(}\PY{n}{n\PYZus{}H}\PY{o}{*}\PY{n}{n\PYZus{}W}\PY{p}{,}\PY{n}{n\PYZus{}C}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}print(a\PYZus{}C\PYZus{}unrolled.shape)}
+            
+            \PY{c+c1}{\PYZsh{} compute the cost with tensorflow (≈1 line)}
+            \PY{n}{J\PYZus{}content} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{n\PYZus{}H}\PY{o}{*}\PY{n}{n\PYZus{}W}\PY{o}{*}\PY{n}{n\PYZus{}C}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}sum}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{subtract}\PY{p}{(}\PY{n}{a\PYZus{}C}\PY{p}{,}\PY{n}{a\PYZus{}G}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+            
+            \PY{k}{return} \PY{n}{J\PYZus{}content}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{tf}\PY{o}{.}\PY{n}{reset\PYZus{}default\PYZus{}graph}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{test}\PY{p}{:}
+            \PY{n}{tf}\PY{o}{.}\PY{n}{set\PYZus{}random\PYZus{}seed}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{a\PYZus{}C} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+            \PY{n}{a\PYZus{}G} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+            \PY{n}{J\PYZus{}content} \PY{o}{=} \PY{n}{compute\PYZus{}content\PYZus{}cost}\PY{p}{(}\PY{n}{a\PYZus{}C}\PY{p}{,} \PY{n}{a\PYZus{}G}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{J\PYZus{}content = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{J\PYZus{}content}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+J\_content = 6.7655926
+
+    \end{Verbatim}
+
+    \textbf{Expected Output}:
+
+\begin{verbatim}
+<tr>
+    <td>
+        **J_content**
+    </td>
+    <td>
+       6.76559
+    </td>
+</tr>
+\end{verbatim}
+
+     \textbf{What you should remember}: - The content cost takes a hidden
+layer activation of the neural network, and measures how different
+\(a^{(C)}\) and \(a^{(G)}\) are. - When we minimize the content cost
+later, this will help make sure \(G\) has similar content as \(C\).
+
+    \subsubsection{3.2 - Computing the style
+cost}\label{computing-the-style-cost}
+
+For our running example, we will use the following style image:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{style\PYZus{}image} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{misc}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images/monet\PYZus{}8.jpeg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{imshow}\PY{p}{(}\PY{n}{style\PYZus{}image}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/den/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:1: DeprecationWarning: `imread` is deprecated!
+`imread` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
+Use ``imageio.imread`` instead.
+  """Entry point for launching an IPython kernel.
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} <matplotlib.image.AxesImage at 0x7f2b30718ef0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This painting was painted in the style of
+\emph{\href{https://en.wikipedia.org/wiki/Impressionism}{impressionism}}.
+
+Lets see how you can now define a "style" const function
+\(J_{style}(S,G)\).
+
+    \subsubsection{3.2.1 - Style matrix}\label{style-matrix}
+
+The style matrix is also called a "Gram matrix." In linear algebra, the
+Gram matrix G of a set of vectors \((v_{1},\dots ,v_{n})\) is the matrix
+of dot products, whose entries are
+\({\displaystyle G_{ij} = v_{i}^T v_{j} = np.dot(v_{i}, v_{j}) }\). In
+other words, \(G_{ij}\) compares how similar \(v_i\) is to \(v_j\): If
+they are highly similar, you would expect them to have a large dot
+product, and thus for \(G_{ij}\) to be large.
+
+Note that there is an unfortunate collision in the variable names used
+here. We are following common terminology used in the literature, but
+\(G\) is used to denote the Style matrix (or Gram matrix) as well as to
+denote the generated image \(G\). We will try to make sure which \(G\)
+we are referring to is always clear from the context.
+
+In NST, you can compute the Style matrix by multiplying the "unrolled"
+filter matrix with their transpose:
+
+The result is a matrix of dimension \((n_C,n_C)\) where \(n_C\) is the
+number of filters. The value \(G_{ij}\) measures how similar the
+activations of filter \(i\) are to the activations of filter \(j\).
+
+One important part of the gram matrix is that the diagonal elements such
+as \(G_{ii}\) also measures how active filter \(i\) is. For example,
+suppose filter \(i\) is detecting vertical textures in the image. Then
+\(G_{ii}\) measures how common vertical textures are in the image as a
+whole: If \(G_{ii}\) is large, this means that the image has a lot of
+vertical texture.
+
+By capturing the prevalence of different types of features (\(G_{ii}\)),
+as well as how much different features occur together (\(G_{ij}\)), the
+Style matrix \(G\) measures the style of an image.
+
+\textbf{Exercise}: Using TensorFlow, implement a function that computes
+the Gram matrix of a matrix A. The formula is: The gram matrix of A is
+\(G_A = AA^T\). If you are stuck, take a look at
+\href{https://www.tensorflow.org/api_docs/python/tf/matmul}{Hint 1} and
+\href{https://www.tensorflow.org/api_docs/python/tf/transpose}{Hint 2}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} GRADED FUNCTION: gram\PYZus{}matrix}
+        
+        \PY{k}{def} \PY{n+nf}{gram\PYZus{}matrix}\PY{p}{(}\PY{n}{A}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Argument:}
+        \PY{l+s+sd}{    A \PYZhy{}\PYZhy{} matrix of shape (n\PYZus{}C, n\PYZus{}H*n\PYZus{}W)}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{    GA \PYZhy{}\PYZhy{} Gram matrix of A, of shape (n\PYZus{}C, n\PYZus{}C)}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (≈1 line)}
+            \PY{n}{GA} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{A}\PY{p}{,}\PY{n}{tf}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{A}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+            
+            \PY{k}{return} \PY{n}{GA}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{tf}\PY{o}{.}\PY{n}{reset\PYZus{}default\PYZus{}graph}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{test}\PY{p}{:}
+            \PY{n}{tf}\PY{o}{.}\PY{n}{set\PYZus{}random\PYZus{}seed}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{A} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+            \PY{n}{GA} \PY{o}{=} \PY{n}{gram\PYZus{}matrix}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+            
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GA = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{GA}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+GA = [[ 6.422305 -4.429122 -2.096682]
+ [-4.429122 19.465837 19.563871]
+ [-2.096682 19.563871 20.686462]]
+
+    \end{Verbatim}
+
+    \textbf{Expected Output}:
+
+\begin{verbatim}
+<tr>
+    <td>
+        **GA**
+    </td>
+    <td>
+       [[  6.42230511  -4.42912197  -2.09668207] <br>
+\end{verbatim}
+
+{[} -4.42912197 19.46583748 19.56387138{]} {[} -2.09668207 19.56387138
+20.6864624 {]}{]}
+
+\begin{verbatim}
+</tr>
+\end{verbatim}
+
+    \subsubsection{3.2.2 - Style cost}\label{style-cost}
+
+    After generating the Style matrix (Gram matrix), your goal will be to
+minimize the distance between the Gram matrix of the "style" image S and
+that of the "generated" image G. For now, we are using only a single
+hidden layer \(a^{[l]}\), and the corresponding style cost for this
+layer is defined as:
+
+\[J_{style}^{[l]}(S,G) = \frac{1}{4 \times {n_C}^2 \times (n_H \times n_W)^2} \sum _{i=1}^{n_C}\sum_{j=1}^{n_C}(G^{(S)}_{ij} - G^{(G)}_{ij})^2\tag{2} \]
+
+where \(G^{(S)}\) and \(G^{(G)}\) are respectively the Gram matrices of
+the "style" image and the "generated" image, computed using the hidden
+layer activations for a particular hidden layer in the network.
+
+    \textbf{Exercise}: Compute the style cost for a single layer.
+
+\textbf{Instructions}: The 3 steps to implement this function are: 1.
+Retrieve dimensions from the hidden layer activations a\_G: - To
+retrieve dimensions from a tensor X, use:
+\texttt{X.get\_shape().as\_list()} 2. Unroll the hidden layer
+activations a\_S and a\_G into 2D matrices, as explained in the picture
+above. - You may find
+\href{https://www.tensorflow.org/versions/r1.3/api_docs/python/tf/transpose}{Hint1}
+and
+\href{https://www.tensorflow.org/versions/r1.2/api_docs/python/tf/reshape}{Hint2}
+useful. 3. Compute the Style matrix of the images S and G. (Use the
+function you had previously written.) 4. Compute the Style cost: - You
+may find
+\href{https://www.tensorflow.org/api_docs/python/tf/reduce_sum}{Hint3},
+\href{https://www.tensorflow.org/api_docs/python/tf/square}{Hint4} and
+\href{https://www.tensorflow.org/api_docs/python/tf/subtract}{Hint5}
+useful.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} GRADED FUNCTION: compute\PYZus{}layer\PYZus{}style\PYZus{}cost}
+         
+         \PY{k}{def} \PY{n+nf}{compute\PYZus{}layer\PYZus{}style\PYZus{}cost}\PY{p}{(}\PY{n}{a\PYZus{}S}\PY{p}{,} \PY{n}{a\PYZus{}G}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Arguments:}
+         \PY{l+s+sd}{    a\PYZus{}S \PYZhy{}\PYZhy{} tensor of dimension (1, n\PYZus{}H, n\PYZus{}W, n\PYZus{}C), hidden layer activations representing style of the image S }
+         \PY{l+s+sd}{    a\PYZus{}G \PYZhy{}\PYZhy{} tensor of dimension (1, n\PYZus{}H, n\PYZus{}W, n\PYZus{}C), hidden layer activations representing style of the image G}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns: }
+         \PY{l+s+sd}{    J\PYZus{}style\PYZus{}layer \PYZhy{}\PYZhy{} tensor representing a scalar value, style cost defined above by equation (2)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             \PY{c+c1}{\PYZsh{} Retrieve dimensions from a\PYZus{}G (≈1 line)}
+             \PY{n}{m}\PY{p}{,} \PY{n}{n\PYZus{}H}\PY{p}{,} \PY{n}{n\PYZus{}W}\PY{p}{,} \PY{n}{n\PYZus{}C} \PY{o}{=} \PY{n}{a\PYZus{}G}\PY{o}{.}\PY{n}{get\PYZus{}shape}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{as\PYZus{}list}\PY{p}{(}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Reshape the images to have them of shape (n\PYZus{}C, n\PYZus{}H*n\PYZus{}W) (≈2 lines)}
+             \PY{n}{a\PYZus{}S} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{a\PYZus{}S}\PY{p}{,}\PY{p}{(}\PY{n}{n\PYZus{}H}\PY{o}{*}\PY{n}{n\PYZus{}W}\PY{p}{,}\PY{n}{n\PYZus{}C}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{a\PYZus{}G} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{a\PYZus{}G}\PY{p}{,}\PY{p}{(}\PY{n}{n\PYZus{}H}\PY{o}{*}\PY{n}{n\PYZus{}W}\PY{p}{,}\PY{n}{n\PYZus{}C}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Computing gram\PYZus{}matrices for both images S and G (≈2 lines)}
+             \PY{n}{GS} \PY{o}{=} \PY{n}{gram\PYZus{}matrix}\PY{p}{(}\PY{n}{a\PYZus{}S}\PY{p}{)}
+             \PY{n}{GG} \PY{o}{=} \PY{n}{gram\PYZus{}matrix}\PY{p}{(}\PY{n}{a\PYZus{}G}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Computing the loss (≈1 line)}
+             \PY{n}{J\PYZus{}style\PYZus{}layer} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{/}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{n\PYZus{}H}\PY{o}{*}\PY{n}{n\PYZus{}W}\PY{o}{*}\PY{n}{n\PYZus{}C}\PY{o}{*}\PY{n}{n\PYZus{}H}\PY{o}{*}\PY{n}{n\PYZus{}W}\PY{o}{*}\PY{n}{n\PYZus{}C}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}sum}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{subtract}\PY{p}{(}\PY{n}{GS}\PY{p}{,}\PY{n}{GG}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{J\PYZus{}style\PYZus{}layer}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{tf}\PY{o}{.}\PY{n}{reset\PYZus{}default\PYZus{}graph}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{test}\PY{p}{:}
+             \PY{n}{tf}\PY{o}{.}\PY{n}{set\PYZus{}random\PYZus{}seed}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{a\PYZus{}S} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+             \PY{n}{a\PYZus{}G} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+             \PY{n}{J\PYZus{}style\PYZus{}layer} \PY{o}{=} \PY{n}{compute\PYZus{}layer\PYZus{}style\PYZus{}cost}\PY{p}{(}\PY{n}{a\PYZus{}S}\PY{p}{,} \PY{n}{a\PYZus{}G}\PY{p}{)}
+             
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{J\PYZus{}style\PYZus{}layer = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{J\PYZus{}style\PYZus{}layer}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+J\_style\_layer = 9.190278
+
+    \end{Verbatim}
+
+    \textbf{Expected Output}:
+
+\begin{verbatim}
+<tr>
+    <td>
+        **J_style_layer**
+    </td>
+    <td>
+       9.19028
+    </td>
+</tr>
+\end{verbatim}
+
+    \subsubsection{3.2.3 Style Weights}\label{style-weights}
+
+So far you have captured the style from only one layer. We'll get better
+results if we "merge" style costs from several different layers. After
+completing this exercise, feel free to come back and experiment with
+different weights to see how it changes the generated image \(G\). But
+for now, this is a pretty reasonable default:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{STYLE\PYZus{}LAYERS} \PY{o}{=} \PY{p}{[}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv1\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv2\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv3\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv4\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv5\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    You can combine the style costs for different layers as follows:
+
+\[J_{style}(S,G) = \sum_{l} \lambda^{[l]} J^{[l]}_{style}(S,G)\]
+
+where the values for \(\lambda^{[l]}\) are given in
+\texttt{STYLE\_LAYERS}.
+
+    We've implemented a compute\_style\_cost(...) function. It simply calls
+your \texttt{compute\_layer\_style\_cost(...)} several times, and
+weights their results using the values in \texttt{STYLE\_LAYERS}. Read
+over it to make sure you understand what it's doing.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{compute\PYZus{}style\PYZus{}cost}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{STYLE\PYZus{}LAYERS}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Computes the overall style cost from several chosen layers}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Arguments:}
+         \PY{l+s+sd}{    model \PYZhy{}\PYZhy{} our tensorflow model}
+         \PY{l+s+sd}{    STYLE\PYZus{}LAYERS \PYZhy{}\PYZhy{} A python list containing:}
+         \PY{l+s+sd}{                        \PYZhy{} the names of the layers we would like to extract style from}
+         \PY{l+s+sd}{                        \PYZhy{} a coefficient for each of them}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns: }
+         \PY{l+s+sd}{    J\PYZus{}style \PYZhy{}\PYZhy{} tensor representing a scalar value, style cost defined above by equation (2)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{} initialize the overall style cost}
+             \PY{n}{J\PYZus{}style} \PY{o}{=} \PY{l+m+mi}{0}
+         
+             \PY{k}{for} \PY{n}{layer\PYZus{}name}\PY{p}{,} \PY{n}{coeff} \PY{o+ow}{in} \PY{n}{STYLE\PYZus{}LAYERS}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{} Select the output tensor of the currently selected layer}
+                 \PY{n}{out} \PY{o}{=} \PY{n}{model}\PY{p}{[}\PY{n}{layer\PYZus{}name}\PY{p}{]}
+         
+                 \PY{c+c1}{\PYZsh{} Set a\PYZus{}S to be the hidden layer activation from the layer we have selected, by running the session on out}
+                 \PY{n}{a\PYZus{}S} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{out}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Set a\PYZus{}G to be the hidden layer activation from same layer. Here, a\PYZus{}G references model[layer\PYZus{}name] }
+                 \PY{c+c1}{\PYZsh{} and isn\PYZsq{}t evaluated yet. Later in the code, we\PYZsq{}ll assign the image G as the model input, so that}
+                 \PY{c+c1}{\PYZsh{} when we run the session, this will be the activations drawn from the appropriate layer, with G as input.}
+                 \PY{n}{a\PYZus{}G} \PY{o}{=} \PY{n}{out}
+                 
+                 \PY{c+c1}{\PYZsh{} Compute style\PYZus{}cost for the current layer}
+                 \PY{n}{J\PYZus{}style\PYZus{}layer} \PY{o}{=} \PY{n}{compute\PYZus{}layer\PYZus{}style\PYZus{}cost}\PY{p}{(}\PY{n}{a\PYZus{}S}\PY{p}{,} \PY{n}{a\PYZus{}G}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Add coeff * J\PYZus{}style\PYZus{}layer of this layer to overall style cost}
+                 \PY{n}{J\PYZus{}style} \PY{o}{+}\PY{o}{=} \PY{n}{coeff} \PY{o}{*} \PY{n}{J\PYZus{}style\PYZus{}layer}
+         
+             \PY{k}{return} \PY{n}{J\PYZus{}style}
+\end{Verbatim}
+
+
+    \textbf{Note}: In the inner-loop of the for-loop above, \texttt{a\_G} is
+a tensor and hasn't been evaluated yet. It will be evaluated and updated
+at each iteration when we run the TensorFlow graph in model\_nn() below.
+
+ \textbf{What you should remember}: - The style of an image can be
+represented using the Gram matrix of a hidden layer's activations.
+However, we get even better results combining this representation from
+multiple different layers. This is in contrast to the content
+representation, where usually using just a single hidden layer is
+sufficient. - Minimizing the style cost will cause the image \(G\) to
+follow the style of the image \(S\). 
+
+    \subsubsection{3.3 - Defining the total cost to
+optimize}\label{defining-the-total-cost-to-optimize}
+
+    Finally, let's create a cost function that minimizes both the style and
+the content cost. The formula is:
+
+\[J(G) = \alpha J_{content}(C,G) + \beta J_{style}(S,G)\]
+
+\textbf{Exercise}: Implement the total cost function which includes both
+the content cost and the style cost.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} GRADED FUNCTION: total\PYZus{}cost}
+         
+         \PY{k}{def} \PY{n+nf}{total\PYZus{}cost}\PY{p}{(}\PY{n}{J\PYZus{}content}\PY{p}{,} \PY{n}{J\PYZus{}style}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{beta} \PY{o}{=} \PY{l+m+mi}{40}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Computes the total cost function}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Arguments:}
+         \PY{l+s+sd}{    J\PYZus{}content \PYZhy{}\PYZhy{} content cost coded above}
+         \PY{l+s+sd}{    J\PYZus{}style \PYZhy{}\PYZhy{} style cost coded above}
+         \PY{l+s+sd}{    alpha \PYZhy{}\PYZhy{} hyperparameter weighting the importance of the content cost}
+         \PY{l+s+sd}{    beta \PYZhy{}\PYZhy{} hyperparameter weighting the importance of the style cost}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{    J \PYZhy{}\PYZhy{} total cost as defined by the formula above.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (≈1 line)}
+             \PY{n}{J} \PY{o}{=} \PY{n}{alpha}\PY{o}{*}\PY{n}{J\PYZus{}content} \PY{o}{+} \PY{n}{beta}\PY{o}{*}\PY{n}{J\PYZus{}style}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{J}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{tf}\PY{o}{.}\PY{n}{reset\PYZus{}default\PYZus{}graph}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{test}\PY{p}{:}
+             \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+             \PY{n}{J\PYZus{}content} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{p}{)}    
+             \PY{n}{J\PYZus{}style} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{p}{)}
+             \PY{n}{J} \PY{o}{=} \PY{n}{total\PYZus{}cost}\PY{p}{(}\PY{n}{J\PYZus{}content}\PY{p}{,} \PY{n}{J\PYZus{}style}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{J = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{J}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+J = 35.34667875478276
+
+    \end{Verbatim}
+
+    \textbf{Expected Output}:
+
+\begin{verbatim}
+<tr>
+    <td>
+        **J**
+    </td>
+    <td>
+       35.34667875478276
+    </td>
+</tr>
+\end{verbatim}
+
+     \textbf{What you should remember}: - The total cost is a linear
+combination of the content cost \(J_{content}(C,G)\) and the style cost
+\(J_{style}(S,G)\) - \(\alpha\) and \(\beta\) are hyperparameters that
+control the relative weighting between content and style
+
+    \subsection{4 - Solving the optimization
+problem}\label{solving-the-optimization-problem}
+
+    Finally, let's put everything together to implement Neural Style
+Transfer!
+
+Here's what the program will have to do:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create an Interactive Session
+\item
+  Load the content image
+\item
+  Load the style image
+\item
+  Randomly initialize the image to be generated
+\item
+  Load the VGG16 model
+\item
+  Build the TensorFlow graph:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Run the content image through the VGG16 model and compute the
+    content cost
+  \item
+    Run the style image through the VGG16 model and compute the style
+    cost
+  \item
+    Compute the total cost
+  \item
+    Define the optimizer and the learning rate
+  \end{itemize}
+\item
+  Initialize the TensorFlow graph and run it for a large number of
+  iterations, updating the generated image at every step.
+\end{enumerate}
+
+ Lets go through the individual steps in detail.
+
+    You've previously implemented the overall cost \(J(G)\). We'll now set
+up TensorFlow to optimize this with respect to \(G\). To do so, your
+program has to reset the graph and use an
+"\href{https://www.tensorflow.org/api_docs/python/tf/InteractiveSession}{Interactive
+Session}". Unlike a regular session, the "Interactive Session" installs
+itself as the default session to build a graph. This allows you to run
+variables without constantly needing to refer to the session object,
+which simplifies the code.
+
+Lets start the interactive session.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Reset the graph}
+         \PY{n}{tf}\PY{o}{.}\PY{n}{reset\PYZus{}default\PYZus{}graph}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Start interactive session}
+         \PY{n}{sess} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{InteractiveSession}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    Let's load, reshape, and normalize our "content" image (the Louvre
+museum picture):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{}content\PYZus{}image = scipy.misc.imread(\PYZdq{}images/louvre\PYZus{}small.jpg\PYZdq{})}
+         \PY{n}{content\PYZus{}image} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{misc}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images/louvre\PYZus{}small.jpg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{content\PYZus{}image} \PY{o}{=} \PY{n}{reshape\PYZus{}and\PYZus{}normalize\PYZus{}image}\PY{p}{(}\PY{n}{content\PYZus{}image}\PY{p}{)}
+         \PY{n}{imshow}\PY{p}{(}\PY{n}{content\PYZus{}image}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{content\PYZus{}image}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/den/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:2: DeprecationWarning: `imread` is deprecated!
+`imread` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
+Use ``imageio.imread`` instead.
+  
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(300, 400, 3)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Let's load, reshape and normalize our "style" image (Claude Monet's
+painting):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{style\PYZus{}image} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{misc}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images/monet.jpg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{style\PYZus{}image} \PY{o}{=} \PY{n}{reshape\PYZus{}and\PYZus{}normalize\PYZus{}image}\PY{p}{(}\PY{n}{style\PYZus{}image}\PY{p}{)}
+         \PY{n}{imshow}\PY{p}{(}\PY{n}{style\PYZus{}image}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{style\PYZus{}image}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/den/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:1: DeprecationWarning: `imread` is deprecated!
+`imread` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
+Use ``imageio.imread`` instead.
+  """Entry point for launching an IPython kernel.
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1, 300, 400, 3)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now, we initialize the "generated" image as a noisy image created from
+the content\_image. By initializing the pixels of the generated image to
+be mostly noise but still slightly correlated with the content image,
+this will help the content of the "generated" image more rapidly match
+the content of the "content" image. (Feel free to look in
+\texttt{nst\_utils.py} to see the details of
+\texttt{generate\_noise\_image(...)}; to do so, click
+"File-\/-\textgreater{}Open..." at the upper-left corner of this Jupyter
+notebook.)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{generated\PYZus{}image} \PY{o}{=} \PY{n}{generate\PYZus{}noise\PYZus{}image}\PY{p}{(}\PY{n}{content\PYZus{}image}\PY{p}{)}
+         \PY{n}{imshow}\PY{p}{(}\PY{n}{generated\PYZus{}image}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} <matplotlib.image.AxesImage at 0x7f2b30316e10>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Next, as explained in part (2), let's load the VGG16 model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{model} \PY{o}{=} \PY{n}{load\PYZus{}vgg\PYZus{}model}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/media/den/FA48890B4888C7B9/2\PYZus{}kurs\PYZus{}masters/deep Learning/pretrained\PYZhy{}model/imagenet\PYZhy{}vgg\PYZhy{}verydeep\PYZhy{}19.mat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    To get the program to compute the content cost, we will now assign
+\texttt{a\_C} and \texttt{a\_G} to be the appropriate hidden layer
+activations. We will use layer \texttt{conv4\_2} to compute the content
+cost. The code below does the following:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Assign the content image to be the input to the VGG model.
+\item
+  Set a\_C to be the tensor giving the hidden layer activation for layer
+  "conv4\_2".
+\item
+  Set a\_G to be the tensor giving the hidden layer activation for the
+  same layer.
+\item
+  Compute the content cost using a\_C and a\_G.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{} Assign the content image to be the input of the VGG model.  }
+         \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{model}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{content\PYZus{}image}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Select the output tensor of layer conv4\PYZus{}2}
+         \PY{n}{out} \PY{o}{=} \PY{n}{model}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{conv4\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Set a\PYZus{}C to be the hidden layer activation from the layer we have selected}
+         \PY{n}{a\PYZus{}C} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{out}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Set a\PYZus{}G to be the hidden layer activation from same layer. Here, a\PYZus{}G references model[\PYZsq{}conv4\PYZus{}2\PYZsq{}] }
+         \PY{c+c1}{\PYZsh{} and isn\PYZsq{}t evaluated yet. Later in the code, we\PYZsq{}ll assign the image G as the model input, so that}
+         \PY{c+c1}{\PYZsh{} when we run the session, this will be the activations drawn from the appropriate layer, with G as input.}
+         \PY{n}{a\PYZus{}G} \PY{o}{=} \PY{n}{out}
+         
+         \PY{c+c1}{\PYZsh{} Compute the content cost}
+         \PY{n}{J\PYZus{}content} \PY{o}{=} \PY{n}{compute\PYZus{}content\PYZus{}cost}\PY{p}{(}\PY{n}{a\PYZus{}C}\PY{p}{,} \PY{n}{a\PYZus{}G}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{Note}: At this point, a\_G is a tensor and hasn't been
+evaluated. It will be evaluated and updated at each iteration when we
+run the Tensorflow graph in model\_nn() below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{} Assign the input of the model to be the \PYZdq{}style\PYZdq{} image }
+         \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{model}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{style\PYZus{}image}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Compute the style cost}
+         \PY{n}{J\PYZus{}style} \PY{o}{=} \PY{n}{compute\PYZus{}style\PYZus{}cost}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{STYLE\PYZus{}LAYERS}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{Exercise}: Now that you have J\_content and J\_style, compute
+the total cost J by calling \texttt{total\_cost()}. Use
+\texttt{alpha\ =\ 10} and \texttt{beta\ =\ 40}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (1 line)}
+         \PY{n}{J} \PY{o}{=} \PY{n}{total\PYZus{}cost}\PY{p}{(}\PY{n}{J\PYZus{}content}\PY{p}{,} \PY{n}{J\PYZus{}style}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{beta} \PY{o}{=} \PY{l+m+mi}{40}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+\end{Verbatim}
+
+
+    You'd previously learned how to set up the Adam optimizer in TensorFlow.
+Lets do that here, using a learning rate of 2.0.
+\href{https://www.tensorflow.org/api_docs/python/tf/train/AdamOptimizer}{See
+reference}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{c+c1}{\PYZsh{} define optimizer (1 line)}
+         \PY{n}{optimizer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{AdamOptimizer}\PY{p}{(}\PY{l+m+mf}{2.0}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} define train\PYZus{}step (1 line)}
+         \PY{n}{train\PYZus{}step} \PY{o}{=} \PY{n}{optimizer}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{J}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{Exercise}: Implement the model\_nn() function which initializes
+the variables of the tensorflow graph, assigns the input image (initial
+generated image) as the input of the VGG16 model and runs the
+train\_step for a large number of steps.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{k}{def} \PY{n+nf}{model\PYZus{}nn}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{n}{input\PYZus{}image}\PY{p}{,} \PY{n}{num\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{200}\PY{p}{)}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} Initialize global variables (you need to run the session on the initializer)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (1 line)}
+             \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{global\PYZus{}variables\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} Run the noisy input image (initial generated image) through the model. Use assign().}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (1 line)}
+             \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{model}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{input\PYZus{}image}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iterations}\PY{p}{)}\PY{p}{:}
+             
+                 \PY{c+c1}{\PYZsh{} Run the session on the train\PYZus{}step to minimize the total cost}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (1 line)}
+                 \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{train\PYZus{}step}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+                 
+                 \PY{c+c1}{\PYZsh{} Compute the generated image by running the session on the current model[\PYZsq{}input\PYZsq{}]}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (1 line)}
+                 \PY{n}{generated\PYZus{}image} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{model}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+                 \PY{c+c1}{\PYZsh{} Print every 20 iteration.}
+                 \PY{k}{if} \PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{20} == 0:
+                     \PY{n}{Jt}\PY{p}{,} \PY{n}{Jc}\PY{p}{,} \PY{n}{Js} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{[}\PY{n}{J}\PY{p}{,} \PY{n}{J\PYZus{}content}\PY{p}{,} \PY{n}{J\PYZus{}style}\PY{p}{]}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Iteration }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total cost = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Jt}\PY{p}{)}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{content cost = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Jc}\PY{p}{)}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{style cost = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Js}\PY{p}{)}\PY{p}{)}
+                     
+                     \PY{c+c1}{\PYZsh{} save current generated image in the \PYZdq{}/output\PYZdq{} directory}
+                     \PY{n}{save\PYZus{}image}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{output/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{generated\PYZus{}image}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} save last generated image}
+             \PY{n}{save\PYZus{}image}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output/generated\PYZus{}image.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{generated\PYZus{}image}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{generated\PYZus{}image}
+\end{Verbatim}
+
+
+    Run the following cell to generate an artistic image. It should take
+about 3min on CPU for every 20 iterations but you start observing
+attractive results after ≈140 iterations. Neural Style Transfer is
+generally trained using GPUs.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{model\PYZus{}nn}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{n}{generated\PYZus{}image}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iteration 0 :
+total cost = 5072014300.0
+content cost = 7916.496
+style cost = 126798376.0
+Iteration 20 :
+total cost = 944980800.0
+content cost = 15190.975
+style cost = 23620722.0
+Iteration 40 :
+total cost = 488106850.0
+content cost = 16632.139
+style cost = 12198513.0
+Iteration 60 :
+total cost = 315890180.0
+content cost = 17261.46
+style cost = 7892939.0
+Iteration 80 :
+total cost = 232569280.0
+content cost = 17591.582
+style cost = 5809834.0
+Iteration 100 :
+total cost = 185127260.0
+content cost = 17832.629
+style cost = 4623723.5
+Iteration 120 :
+total cost = 153621600.0
+content cost = 18009.014
+style cost = 3836037.8
+Iteration 140 :
+total cost = 130585740.0
+content cost = 18147.535
+style cost = 3260106.8
+Iteration 160 :
+total cost = 113142776.0
+content cost = 18259.645
+style cost = 2824004.5
+Iteration 180 :
+total cost = 99544830.0
+content cost = 18386.541
+style cost = 2484024.2
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} array([[[[-4.76480026e+01, -4.03779373e+01,  2.46488113e+01],
+                  [-4.54444008e+01, -2.08670635e+01,  3.60833702e+01],
+                  [-2.66788521e+01, -1.21037941e+01,  1.64638519e+01],
+                  {\ldots},
+                  [ 8.60791874e+00,  4.23724890e+00, -6.14150524e-01],
+                  [-2.16519089e+01, -3.10079694e-01,  3.89077454e+01],
+                  [-1.17926102e+01, -1.14179010e+01,  6.55603409e+01]],
+         
+                 [[-9.32888412e+01, -6.62809753e+01, -1.15546370e+00],
+                  [-3.77510147e+01, -4.31242752e+01, -2.23068547e+00],
+                  [-3.05725212e+01, -3.08860893e+01,  1.05583024e+00],
+                  {\ldots},
+                  [ 1.61373653e+01,  5.00256729e+00,  2.70553567e-02],
+                  [-7.49465895e+00,  2.70344162e+00,  1.74283752e+01],
+                  [-1.49614038e+01, -7.19912863e+00,  4.35197792e+01]],
+         
+                 [[-5.78141975e+01, -4.50191231e+01, -1.67740574e+01],
+                  [-4.98944130e+01, -3.61172791e+01, -1.03441648e+01],
+                  [-3.97776604e+01, -3.52251091e+01, -3.64183664e+00],
+                  {\ldots},
+                  [ 3.15052748e+00, -1.22096405e+01,  2.77864170e+01],
+                  [ 9.46797132e-01, -4.75889087e-01,  2.00333881e+01],
+                  [-1.87322807e+01,  2.80560160e+00,  4.11440506e+01]],
+         
+                 {\ldots},
+         
+                 [[-5.90074387e+01, -6.07144051e+01, -6.52721691e+00],
+                  [-4.85432205e+01, -5.47788963e+01, -2.81528139e+00],
+                  [-1.06163034e+01,  7.34539747e+00,  4.14555025e+00],
+                  {\ldots},
+                  [-6.51928101e+01, -6.24099655e+01, -9.90598373e+01],
+                  [-5.53292809e+01, -4.56402740e+01,  1.54086256e+01],
+                  [-2.25628967e+01, -1.42789564e+01,  1.58478296e+00]],
+         
+                 [[-6.43096542e+01, -7.86012802e+01,  8.85737228e+00],
+                  [-3.70566025e+01, -5.09902496e+01,  2.07806015e+01],
+                  [-9.86745548e+00,  3.18453922e+01,  3.48619080e+01],
+                  {\ldots},
+                  [-7.23482742e+01, -6.50861740e+01, -7.27492294e+01],
+                  [-6.55149918e+01, -4.47551041e+01, -2.23140678e+01],
+                  [-5.85303459e+01, -4.71567192e+01,  3.97202373e+00]],
+         
+                 [[-9.53888626e+01, -7.11751328e+01,  3.32777596e+01],
+                  [-1.15935097e+01, -9.83462524e+00,  5.18374100e+01],
+                  [ 7.95367289e+00,  2.63735180e+01,  4.63715439e+01],
+                  {\ldots},
+                  [-8.68310165e+01, -5.92640495e+01,  5.67989302e+00],
+                  [-6.64421844e+01, -6.16336746e+01,  1.74318733e+01],
+                  [-1.93646164e+01, -5.53182716e+01,  1.08220940e+01]]]],
+               dtype=float32)
+\end{Verbatim}
+            
+    \textbf{Expected Output}:
+
+\begin{verbatim}
+<tr>
+    <td>
+        **Iteration 0 : **
+    </td>
+    <td>
+       total cost = 5.05035e+09 <br>
+       content cost = 7877.67 <br>
+       style cost = 1.26257e+08
+    </td>
+</tr>
+\end{verbatim}
+
+    You're done! After running this, in the upper bar of the notebook click
+on "File" and then "Open". Go to the "/output" directory to see all the
+saved images. Open "generated\_image" to see the generated image! :)
+
+You should see something the image presented below on the right:
+
+We didn't want you to wait too long to see an initial result, and so had
+set the hyperparameters accordingly. To get the best looking results,
+running the optimization algorithm longer (and perhaps with a smaller
+learning rate) might work better. After completing and submitting this
+assignment, we encourage you to come back and play more with this
+notebook, and see if you can generate even better looking images.
+
+    Here are few other examples:
+
+\begin{itemize}
+\item
+  The beautiful ruins of the ancient city of Persepolis (Iran) with the
+  style of Van Gogh (The Starry Night) 
+\item
+  The tomb of Cyrus the great in Pasargadae with the style of a Ceramic
+  Kashi from Ispahan. 
+\item
+  A scientific study of a turbulent fluid with the style of a abstract
+  blue fluid painting. 
+\end{itemize}
+
+    \subsection{5 - Test with your own image
+(Optional/Ungraded)}\label{test-with-your-own-image-optionalungraded}
+
+    Finally, you can also rerun the algorithm on your own images!
+
+To do so, go back to part 4 and change the content image and style image
+with your own pictures. In detail, here's what you should do:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Click on "File -\textgreater{} Open" in the upper tab of the notebook
+\item
+  Go to "/images" and upload your images (requirement: (WIDTH = 300,
+  HEIGHT = 225)), rename them "my\_content.png" and "my\_style.png" for
+  example.
+\item
+  Change the code in part (3.4) from :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{content_image }\OperatorTok{=}\NormalTok{ scipy.misc.imread(}\StringTok{"images/louvre.jpg"}\NormalTok{)}
+\NormalTok{style_image }\OperatorTok{=}\NormalTok{ scipy.misc.imread(}\StringTok{"images/claude-monet.jpg"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  to:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{content_image }\OperatorTok{=}\NormalTok{ scipy.misc.imread(}\StringTok{"images/my_content.jpg"}\NormalTok{)}
+\NormalTok{style_image }\OperatorTok{=}\NormalTok{ scipy.misc.imread(}\StringTok{"images/my_style.jpg"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Rerun the cells (you may need to restart the Kernel in the upper tab
+  of the notebook).
+\end{enumerate}
+
+You can also tune your hyperparameters: - Which layers are responsible
+for representing the style? STYLE\_LAYERS - How many iterations do you
+want to run the algorithm? num\_iterations - What is the relative
+weighting between content and style? alpha/beta
+
+    \subsection{6 - Conclusion}\label{conclusion}
+
+Great job on completing this assignment! You are now able to use Neural
+Style Transfer to generate artistic images. This is also your first time
+building a model in which the optimization algorithm updates the pixel
+values rather than the neural network's parameters. Deep learning has
+many different types of models and this is only one of them!
+
+ What you should remember: - Neural Style Transfer is an algorithm that
+given a content image C and a style image S can generate an artistic
+image - It uses representations (hidden layer activations) based on a
+pretrained ConvNet. - The content cost function is computed using one
+hidden layer's activations. - The style cost function for one layer is
+computed using the Gram matrix of that layer's activations. The overall
+style cost function is obtained using several hidden layers. -
+Optimizing the total cost function results in synthesizing new images.
+
+    This was the final programming exercise of this course.
+Congratulations-\/-you've finished all the programming exercises of this
+course on Convolutional Networks! We hope to also see you in Course 5,
+on Sequence models!
+
+    \subsubsection{References:}\label{references}
+
+The Neural Style Transfer algorithm was due to Gatys et al. (2015).
+Harish Narayanan and Github user "log0" also have highly readable
+write-ups from which we drew inspiration. The pre-trained network used
+in this implementation is a VGG network, which is due to Simonyan and
+Zisserman (2015). Pre-trained weights were from the work of the
+MathConvNet team.
+
+\begin{itemize}
+\tightlist
+\item
+  Leon A. Gatys, Alexander S. Ecker, Matthias Bethge, (2015). A Neural
+  Algorithm of Artistic Style (https://arxiv.org/abs/1508.06576)
+\item
+  Harish Narayanan, Convolutional neural networks for artistic style
+  transfer. https://harishnarayanan.org/writing/artistic-style-transfer/
+\item
+  Log0, TensorFlow Implementation of "A Neural Algorithm of Artistic
+  Style".
+  http://www.chioka.in/tensorflow-implementation-neural-algorithm-of-artistic-style
+\item
+  Karen Simonyan and Andrew Zisserman (2015). Very deep convolutional
+  networks for large-scale image recognition
+  (https://arxiv.org/pdf/1409.1556.pdf)
+\item
+  MatConvNet. http://www.vlfeat.org/matconvnet/pretrained/
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
